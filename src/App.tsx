@@ -6,6 +6,8 @@ import NotFound from "./pages/NotFound";
 import NavBar from "./layout/NavBar";
 import Footer from "./layout/Footer";
 import { useAuth } from "./hooks/useAuth";
+import CategoryProducts from "./pages/CategoryProducts";
+import ProductDetail from "./pages/ProductDetail";
 import { useEffect } from "react";
 
 function App() {
@@ -34,6 +36,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/category/:name" element={<CategoryProducts />} />
+          <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

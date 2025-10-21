@@ -28,9 +28,9 @@ export function useProductsByCategory() {
           );
         });
 
-        // Si hay productos sin categoría válida
         const unassigned = products.filter(
-          (p: Product) => !categories.some((c: Category) => c.id === p.categoryId)
+          (p: Product) =>
+            !categories.some((c: Category) => c.id === p.categoryId)
         );
 
         if (unassigned.length > 0) groupedData["Sin categoría"] = unassigned;

@@ -1,7 +1,9 @@
 import { useProductsByCategory } from "../hooks/useProductsByCategory";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const { grouped, loading, error } = useProductsByCategory();
+  const navigate = useNavigate();
 
   if (loading) return <p className="p-6 text-center">Cargando productos...</p>;
   if (error) return <p className="p-6 text-center text-red-500">{error}</p>;
@@ -13,7 +15,10 @@ function Home() {
       {categoryNames.map((categoryName) => (
         <div
           key={categoryName}
-          className="flex flex-col justify-between p-4 transition bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md"
+          onClick={() =>
+            navigate(`/category/${encodeURIComponent(categoryName)}`)
+          }
+          className="flex flex-col justify-between p-4 transition bg-white border border-gray-200 rounded-lg shadow-sm cursor-pointer hover:shadow-md"
         >
           <h2 className="mb-3 text-lg font-bold text-gray-800">
             {categoryName}
@@ -23,26 +28,16 @@ function Home() {
             {grouped[categoryName].slice(0, 4).map((product) => (
               <div
                 key={product.id}
-                className="flex flex-col items-center overflow-hidden text-center cursor-pointer group"
+                className="flex flex-col items-center overflow-hidden text-center group"
               >
                 <img
                   src={product.imageUrl}
                   alt={product.name}
                   className="object-cover w-full h-24 transition-transform duration-200 rounded-md group-hover:scale-105"
                 />
-                <p className="mt-1 text-sm text-gray-700 truncate">
-                  {product.name}
-                </p>
               </div>
             ))}
           </div>
-
-          <a
-            href="#"
-            className="mt-3 text-sm font-medium text-blue-600 hover:underline"
-          >
-            Descubre más
-          </a>
         </div>
       ))}
     </div>
