@@ -5,11 +5,29 @@ import Cart from "./pages/Cart";
 import NotFound from "./pages/NotFound";
 import NavBar from "./layout/NavBar";
 import Footer from "./layout/Footer";
+import { useAuth } from "./hooks/useAuth";
+import { useEffect } from "react";
 
 function App() {
+  const { user, loading, logout } = useAuth();
+
+  useEffect(() => {
+    if (!loading && user) {
+      console.log("Usuario autenticado:", user);
+    }
+  }, [user, loading]);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen text-lg font-semibold">
+        Cargando...
+      </div>
+    );
+  }
+
   return (
     <Router>
-      <NavBar />
+      <NavBar user={user} onLogout={logout} />
 
       <main style={{ minHeight: "80vh", padding: "1rem" }}>
         <Routes>
