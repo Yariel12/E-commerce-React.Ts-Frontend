@@ -34,7 +34,6 @@ function CategoryProducts() {
 
   return (
     <div className="p-8 mx-auto max-w-7xl">
-      {/* Breadcrumb */}
       <div className="mb-6 text-sm text-gray-500">
         <Link to="/" className="text-blue-600 hover:underline">
           Inicio
@@ -42,12 +41,10 @@ function CategoryProducts() {
         / <span className="font-medium text-gray-700">{name}</span>
       </div>
 
-      {/* Título */}
       <h1 className="mb-8 text-3xl font-bold text-gray-800 capitalize">
         {name}
       </h1>
 
-      {/* Grid de productos */}
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {products.map((product) => (
           <Link
@@ -55,7 +52,6 @@ function CategoryProducts() {
             to={`/product/${product.id}`}
             className="block overflow-hidden transition-all duration-300 bg-white border border-gray-100 shadow-sm group rounded-2xl hover:shadow-md"
           >
-            {/* Imagen */}
             <div className="relative w-full h-56 overflow-hidden bg-gray-50">
               <img
                 src={product.imageUrl}
@@ -64,7 +60,6 @@ function CategoryProducts() {
               />
             </div>
 
-            {/* Detalles */}
             <div className="p-5">
               <h3 className="text-base font-semibold text-gray-800 truncate">
                 {product.name}

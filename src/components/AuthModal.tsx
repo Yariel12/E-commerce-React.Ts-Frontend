@@ -28,7 +28,7 @@ export default function AuthModal({ open, onClose, mode }: AuthModalProps) {
     try {
       if (mode === "register") {
         await AuthService.register(form);
-        alert("✅ Usuario registrado. Ahora inicia sesión.");
+        alert("Usuario registrado. Ahora inicia sesión.");
         onClose();
       } else {
         await login(form.email, form.password);
@@ -51,7 +51,6 @@ export default function AuthModal({ open, onClose, mode }: AuthModalProps) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          {/* Modal */}
           <motion.div
             className="relative w-[90%] max-w-md bg-gray-900 rounded-2xl shadow-2xl border border-gray-800 p-6 text-white"
             initial={{ scale: 0.9, opacity: 0, y: 40 }}
@@ -59,7 +58,6 @@ export default function AuthModal({ open, onClose, mode }: AuthModalProps) {
             exit={{ scale: 0.9, opacity: 0, y: 20 }}
             transition={{ type: "spring", damping: 20, stiffness: 250 }}
           >
-            {/* Cerrar */}
             <button
               onClick={onClose}
               className="absolute p-2 text-gray-400 rounded-full hover:text-white hover:bg-gray-800 top-3 right-3"
@@ -67,7 +65,6 @@ export default function AuthModal({ open, onClose, mode }: AuthModalProps) {
               <X size={18} />
             </button>
 
-            {/* Header */}
             <div className="flex flex-col items-center mb-5 text-center">
               <div className="p-3 mb-2 rounded-full bg-blue-600/10">
                 {mode === "login" ? (
@@ -86,7 +83,6 @@ export default function AuthModal({ open, onClose, mode }: AuthModalProps) {
               </p>
             </div>
 
-            {/* Form */}
             <form onSubmit={handleSubmit} className="flex flex-col gap-3">
               {mode === "register" && (
                 <div>

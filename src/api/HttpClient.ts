@@ -57,7 +57,7 @@ class HttpClient {
   }
 }
 
-const baseURL = import.meta.env.VITE_API_URL || "http://localhost:5105/api";
+const baseURL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 export const http = new HttpClient(baseURL);
 
 export default HttpClient;

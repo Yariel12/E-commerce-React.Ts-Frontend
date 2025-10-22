@@ -9,6 +9,8 @@ import { useAuth } from "./hooks/useAuth";
 import CategoryProducts from "./pages/CategoryProducts";
 import ProductDetail from "./pages/ProductDetail";
 import { useEffect } from "react";
+import { ToastContainer } from "react-toastify"; // <--- importar ToastContainer
+import "react-toastify/dist/ReactToastify.css"; // <--- importar estilos
 
 function App() {
   const { user, loading, logout } = useAuth();
@@ -43,6 +45,9 @@ function App() {
       </main>
 
       <Footer />
+
+      {/* ToastContainer para que los toasts funcionen */}
+      <ToastContainer position="top-right" autoClose={3000} />
     </Router>
   );
 }

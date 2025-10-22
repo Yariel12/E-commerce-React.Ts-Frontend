@@ -1,6 +1,8 @@
+"use client";
+
 import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
-import { User as UserIcon, LogIn } from "lucide-react";
+import { UserIcon, LogIn, ShoppingBag } from "lucide-react";
 import type { User } from "../types/user";
 import AuthModal from "../components/AuthModal";
 
@@ -25,17 +27,25 @@ function NavBar({ user, onLogout }: NavBarProps) {
 
   return (
     <>
-      <nav className="relative px-4 py-3 text-white bg-gray-900 shadow-md">
-        <div className="container flex items-center justify-between mx-auto">
-          <Link to="/" className="text-2xl font-bold text-blue-400">
-            🛍️ SX Shop
+      <nav className="sticky top-0 z-50 px-6 py-4 text-white border-b border-gray-800 shadow-xl bg-gray-900/95 backdrop-blur-md">
+        <div className="container flex items-center justify-between mx-auto max-w-7xl">
+          <Link
+            to="/"
+            className="flex items-center gap-2 text-2xl font-bold transition-transform hover:scale-105"
+          >
+            <ShoppingBag className="text-blue-400" size={28} />
+            <span className="text-transparent bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text">
+              SX Shop
+            </span>
           </Link>
 
-          <div className="hidden gap-6 md:flex">
+          <div className="hidden gap-8 md:flex">
             <NavLink
               to="/"
               className={({ isActive }) =>
-                isActive ? "text-blue-400 font-semibold" : "hover:text-blue-300"
+                isActive
+                  ? "text-blue-400 font-semibold relative after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-0.5 after:bg-blue-400 after:rounded-full"
+                  : "hover:text-blue-300 transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-blue-400 after:rounded-full after:transition-all hover:after:w-full"
               }
             >
               Home
@@ -43,7 +53,9 @@ function NavBar({ user, onLogout }: NavBarProps) {
             <NavLink
               to="/products"
               className={({ isActive }) =>
-                isActive ? "text-blue-400 font-semibold" : "hover:text-blue-300"
+                isActive
+                  ? "text-blue-400 font-semibold relative after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-0.5 after:bg-blue-400 after:rounded-full"
+                  : "hover:text-blue-300 transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-blue-400 after:rounded-full after:transition-all hover:after:w-full"
               }
             >
               Products
@@ -56,39 +68,44 @@ function NavBar({ user, onLogout }: NavBarProps) {
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
             >
-              <div className="flex items-center gap-2">
-                <UserIcon size={26} className="text-blue-400" />
-                <span className="hidden md:inline">
+              <div className="flex items-center gap-2 px-4 py-2 transition-all rounded-lg hover:bg-gray-800">
+                <div className="p-1 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500">
+                  <UserIcon size={20} className="text-white" />
+                </div>
+                <span className="hidden font-medium md:inline">
                   {user.username || "Account"}
                 </span>
               </div>
 
               {openMenu && (
-                <div className="absolute right-0 w-48 mt-3 overflow-hidden bg-gray-800 border border-gray-700 rounded-lg shadow-lg animate-fadeIn">
-                  <NavLink
-                    to="/cart"
-                    className="block px-4 py-2 hover:bg-gray-700"
-                  >
-                    Cart
-                  </NavLink>
-                  <NavLink
-                    to="/address"
-                    className="block px-4 py-2 hover:bg-gray-700"
-                  >
-                    Address
-                  </NavLink>
-                  <NavLink
-                    to="/orders"
-                    className="block px-4 py-2 hover:bg-gray-700"
-                  >
-                    Orders
-                  </NavLink>
-                  <button
-                    onClick={onLogout}
-                    className="w-full px-4 py-2 text-left hover:bg-gray-700"
-                  >
-                    Logout
-                  </button>
+                <div className="absolute right-0 w-56 mt-2 overflow-hidden border border-gray-700 shadow-2xl rounded-xl bg-gray-800/95 backdrop-blur-md animate-fadeIn">
+                  <div className="p-2">
+                    <NavLink
+                      to="/cart"
+                      className="block px-4 py-2.5 rounded-lg hover:bg-gray-700 transition-colors font-medium"
+                    >
+                      🛒 Cart
+                    </NavLink>
+                    <NavLink
+                      to="/address"
+                      className="block px-4 py-2.5 rounded-lg hover:bg-gray-700 transition-colors font-medium"
+                    >
+                      📍 Address
+                    </NavLink>
+                    <NavLink
+                      to="/orders"
+                      className="block px-4 py-2.5 rounded-lg hover:bg-gray-700 transition-colors font-medium"
+                    >
+                      📦 Orders
+                    </NavLink>
+                    <div className="my-2 border-t border-gray-700"></div>
+                    <button
+                      onClick={onLogout}
+                      className="w-full px-4 py-2.5 text-left rounded-lg hover:bg-red-500/20 hover:text-red-400 transition-colors font-medium"
+                    >
+                      🚪 Logout
+                    </button>
+                  </div>
                 </div>
               )}
             </div>
@@ -96,13 +113,14 @@ function NavBar({ user, onLogout }: NavBarProps) {
             <div className="flex items-center gap-3">
               <button
                 onClick={() => setAuthModal("login")}
-                className="flex items-center gap-1 hover:text-blue-300"
+                className="flex items-center gap-2 px-4 py-2 font-medium transition-all rounded-lg hover:bg-gray-800"
               >
-                <LogIn size={20} /> Login
+                <LogIn size={18} />
+                <span>Login</span>
               </button>
               <button
                 onClick={() => setAuthModal("register")}
-                className="px-3 py-1 text-white bg-blue-500 rounded-md hover:bg-blue-600"
+                className="px-5 py-2 font-semibold text-white transition-all rounded-lg shadow-lg bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 hover:shadow-blue-500/50 hover:scale-105"
               >
                 Register
               </button>
