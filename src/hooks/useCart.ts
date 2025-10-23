@@ -24,6 +24,25 @@ export const useCart = () => {
     }
   };
 
+  const removeItemCart = async (productId: number) => {
+    if (!cart) return;
+
+    const exists = cart.items.find((item) => item.productId === productId);
+    if (!exists) {
+      toast.error("El producto no está en el carrito 😢");
+      return;
+    }
+
+    try {
+      await cartService.removeItem(productId);
+      await fetchCart();
+      toast.success("Producto eliminado del carrito");
+    } catch (err) {
+      console.error(err);
+      toast.error("Error al eliminar del carrito ");
+    }
+  };
+
   const addToCart = async (productId: number, quantity: number) => {
     try {
       await cartService.addToCart(productId, quantity);
@@ -38,6 +57,5 @@ export const useCart = () => {
   useEffect(() => {
     fetchCart();
   }, []);
-
-  return { cart, loading, error, addToCart, fetchCart };
+  return { cart, loading, error, addToCart, fetchCart, removeItemCart };
 };

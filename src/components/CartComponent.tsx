@@ -2,7 +2,7 @@ import { useCart } from "../hooks/useCart";
 import { FiShoppingCart, FiTrash2, FiPackage } from "react-icons/fi";
 
 export const CartProduct = () => {
-  const { cart, loading, addToCart } = useCart();
+  const { cart, loading, addToCart, removeItemCart } = useCart();
 
   if (loading) {
     return (
@@ -77,6 +77,7 @@ export const CartProduct = () => {
                   <button
                     className="flex items-center justify-center p-2 transition-colors rounded-lg hover:bg-destructive/10"
                     aria-label="Eliminar producto"
+                    onClick={() => removeItemCart(item.product.id)}
                   >
                     <FiTrash2 className="w-5 h-5 transition-colors text-muted-foreground group-hover:text-destructive" />
                   </button>

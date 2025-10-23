@@ -18,4 +18,12 @@ export const cartService = {
     console.log(res.data.message);
     return res.data;
   },
+
+  removeItem: async (productId: number) => {
+    const res = await http.post<{ message: string }>(`${BASE_URL}/remove`, {
+      productId,
+    });
+    console.log(res.data.message);
+    return res.data;
+  },
 };
