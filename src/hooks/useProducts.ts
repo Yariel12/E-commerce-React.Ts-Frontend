@@ -10,8 +10,8 @@ export function useProducts() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await ProductService.getAll();
-        setProducts(res.data);
+        const res = await ProductService.getAll(1, 10);
+        setProducts(res.data.data);
       } catch (err) {
         console.error("Error cargando productos:", err);
         setError("Error al obtener productos");

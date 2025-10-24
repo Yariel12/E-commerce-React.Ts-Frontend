@@ -8,3 +8,10 @@ export interface Product {
   categoryName: string;
   imageUrl: string;
 }
+
+export interface PagedResponse<T> {
+  data: T[];
+  total: number;
+  page: number;
+  limit: number;
+}
