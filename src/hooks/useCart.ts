@@ -18,7 +18,7 @@ export const useCart = () => {
     } catch (err) {
       console.error("Error al obtener el carrito:", err);
       setError("Error al obtener el carrito.");
-      toast.error("Error al cargar el carrito 😢");
+      toast.error("Error al cargar el carrito");
     } finally {
       setLoading(false);
     }
@@ -29,7 +29,7 @@ export const useCart = () => {
 
     const exists = cart.items.find((item) => item.productId === productId);
     if (!exists) {
-      toast.error("El producto no está en el carrito 😢");
+      toast.error("El producto no está en el carrito");
       return;
     }
 

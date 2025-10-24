@@ -9,8 +9,8 @@ import { useAuth } from "./hooks/useAuth";
 import CategoryProducts from "./pages/CategoryProducts";
 import ProductDetail from "./pages/ProductDetail";
 import { useEffect } from "react";
-import { ToastContainer } from "react-toastify"; // <--- importar ToastContainer
-import "react-toastify/dist/ReactToastify.css"; // <--- importar estilos
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const { user, loading, logout } = useAuth();
