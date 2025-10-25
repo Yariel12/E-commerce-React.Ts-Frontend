@@ -13,12 +13,12 @@ export function useProductsByCategory() {
     const fetchAll = async () => {
       try {
         const [productRes, categoryRes] = await Promise.all([
-          ProductService.getAll<{ data: Product[] }>(),
-          CategoryService.getAll<Category[]>(),
+          ProductService.getAll(),
+          CategoryService.getAll(),
         ]);
 
-        const products = productRes.data.data; // ✅ arreglo aquí
-        const categories = categoryRes.data;
+        const products = productRes.data.data as Product[];
+        const categories = categoryRes.data as Category[];
 
         const groupedData: Record<string, Product[]> = {};
 
